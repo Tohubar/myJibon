@@ -74,7 +74,7 @@ export const commentOnPost = async (req, res) => {
         const postId = req.params.id
         const userId = req.user._id
         if (!text) 
-            return res.status(400).json({success: false, messsage: "Text should not be empty"})
+            return res.status(400).json({success: false, message: "Text should not be empty"})
         const post = await Post.findById(postId)
         if (!post) 
             return res.status(404).json({success: false, message: "post not found"})
@@ -146,7 +146,7 @@ export const getFollowingPosts = async (req, res) => {
         const userId = req.user._id
         const user = await User.findById(userId)
         if (!user)
-            return res.status(404).json({success: false, messsage: "User not found"})
+            return res.status(404).json({success: false, message: "User not found"})
         const feedPosts = await Post.find({user: {$in: user.following}}).sort({createdAt: -1}).populate({
             path: "user",
             select: "-password"
@@ -166,7 +166,7 @@ export const getUserPosts = async (req, res) => {
         const { username } = req.params
         const user = await User.findOne({ username })
         if (!user)
-            return res.status(404).json({success: false, messsage: "User not found"})
+            return res.status(404).json({success: false, message: "User not found"})
         const posts = await Post.find({user: user._id}).sort({createdAt: -1}).populate({
             path: "user",
             select: "-password"
