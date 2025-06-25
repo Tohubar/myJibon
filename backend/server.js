@@ -15,7 +15,7 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_SECRET_KEY
 })
-app.use(express.json())
+app.use(express.json({limit: "5mb"})) // limit should not be too much to prevet DoS
 app.use(express.urlencoded({extended: true})) // to parse form data
 app.use(cookieParser())
 
