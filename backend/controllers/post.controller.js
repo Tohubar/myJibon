@@ -82,7 +82,10 @@ export const commentOnPost = async (req, res) => {
         post.comments.push(comment)
         await post.save()
 
-        res.status(200).json(post)
+        const updatedPost = await Post.findById(postId).populate("comments.user", "username fullName profileImg");
+
+		res.status(200).json(updatedPost.comments); // Only send updatedComments
+        // res.status(200).json(post)
     } catch (error) {
         res.status(500).json({success: false, message: error.message})
     }
