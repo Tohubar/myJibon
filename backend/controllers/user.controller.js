@@ -10,7 +10,7 @@ export const getUserProfile = async (req, res) => {
 
     try {
         const user = await User.findOne({username}).select("-password")
-        if (!user) return res.status(400).json({succes: false, message: "User not found"})
+        if (!user) return res.status(400).json({success: false, message: "User not found"})
 
         res.status(200).json(user)
     } catch (error) {
@@ -48,7 +48,7 @@ export const followUnfollowUser = async (req, res) => {
             res.status(200).json({success: true, message: "User followed Succesfully"})
         }
     } catch (error) {
-        res.status(500).json({succes: false, message: "Internal error.."})
+        res.status(500).json({success: false, message: "Internal error.."})
     }
 }
 
